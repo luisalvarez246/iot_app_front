@@ -1,12 +1,13 @@
 import React from "react";
+import MapComponent from "../components/Home/MapComponent";
 
-const Home = () =>
+const HomeView = () =>
 {
 	return(
 		<>
-			<h1>I am home</h1>
+			<MapComponent />
 		</>
 	)
 }
 
-export default Home;
+export default HomeView;
