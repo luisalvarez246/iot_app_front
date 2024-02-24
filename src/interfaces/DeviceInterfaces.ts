@@ -9,3 +9,5 @@ export interface Device
 }
 
 export type NewDevice = Omit<Device, 'id'>;
+
+export type DeviceKeys = keyof Device;
