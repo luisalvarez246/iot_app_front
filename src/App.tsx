@@ -1,15 +1,18 @@
-import React from 'react';
-import { BrowserRouter, createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import './App.css';
 import AppRouter from './router/AppRouter';
 import TopBar from './components/TopBar';
+import deviceService from './services/deviceService';
+import { Container } from '@mui/material';
 
 const App = () => 
 {
   return (
     <>
 		<TopBar />
-		<AppRouter />
+		<Container maxWidth="xl">
+			<AppRouter />
+		</Container>
 	</>
   );
 }

@@ -20,6 +20,13 @@ export interface DeviceDrawerProps
     add: AddDevice;
 }
 
+export interface DeviceDetailsProps 
+{
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    details: Device;
+}
+
 export interface NewDeviceForm 
 {
     name: string;
