@@ -8,6 +8,29 @@ export interface Device
 	longitude: number
 }
 
+export interface DeviceTableProps
+{
+	devices: Device[]
+}
+
+export interface DeviceDrawerProps 
+{
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    add: AddDevice;
+}
+
+export interface NewDeviceForm 
+{
+    name: string;
+    mobileNumber: string;
+}
+
 export type NewDevice = Omit<Device, 'id'>;
 
 export type DeviceKeys = keyof Device;
+
+export type DeviceActions = 'add' | 'modify' | 'delete';
+
+export type AddDevice = (object: NewDevice) => Promise<void>;
+
