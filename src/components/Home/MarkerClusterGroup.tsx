@@ -35,12 +35,15 @@ const MarkerClusterGroup = ({ children }: MarkerClusterGroupProps) =>
 	{
       if (React.isValidElement(child)) 
 	  {
-		const { position } = child.props as any;
-		if (position) 
+		const { position, eventHandlers, alt, title } = child.props;
+		
+		const marker = L.marker(position);
+		if (eventHandlers && eventHandlers.click) 
 		{
-		  const marker = L.marker(position);
-		  markerClusterGroup.addLayer(marker);
+			marker.on('click', eventHandlers.click);
 		}
+		marker.bindTooltip(`${alt} <br> ${title}`, { permanent: false, opacity: 0.9 });
+		markerClusterGroup.addLayer(marker);
       }
     });
 

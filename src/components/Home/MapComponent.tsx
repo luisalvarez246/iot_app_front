@@ -25,13 +25,12 @@ const MapComponent = ({ devices, mapZoom, mapCenter }: MapComponentProps) =>
 			<MarkerClusterGroup>
 				{devices.map((device) =>(
 					<Marker
-						key={device.id} 
+						key={device.id}
+						title={device.id}
+						alt={device.name}
 						position={[device.latitude, device.longitude]}
 						eventHandlers={{ click: () => handleDetails(device) }}
 					>
-    					<Tooltip>
-    					  {device.name} <br /> {device.id}
-    					</Tooltip>
   					</Marker>
 				))}
 			</MarkerClusterGroup>
