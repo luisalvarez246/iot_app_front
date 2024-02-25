@@ -10,7 +10,13 @@ export interface Device
 
 export interface DeviceTableProps
 {
-	devices: Device[]
+	devices: Device[];
+}
+
+export interface MapComponentProps extends DeviceTableProps
+{
+	mapZoom: number;
+	mapCenter: [number, number];
 }
 
 export interface DeviceDrawerProps 

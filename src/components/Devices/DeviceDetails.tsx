@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -26,6 +25,8 @@ const Transition = React.forwardRef(
 
 const DeviceDetails = ({open, setOpen, details}: DeviceDetailsProps) =>
 {
+	const excludeKeys = ['name', '__typename'];
+
   const handleClose = () => 
   {
     setOpen(false);
@@ -57,7 +58,7 @@ const DeviceDetails = ({open, setOpen, details}: DeviceDetailsProps) =>
         <List>
 	  		{Object.entries(details).map(([key, value], index, array) => (
 				<ListItemButton key={key}>
-					{key !== 'name' && <ListItemText primary={value.toLocaleString()} secondary={key} />}
+					{!excludeKeys.includes(key) && <ListItemText primary={value.toLocaleString()} secondary={key} />}
 					{index !== array.length - 1 && <Divider />}
 				</ListItemButton>
 			))}

@@ -1,11 +1,11 @@
 import React from "react";
-import MapComponent from "../components/Home/MapComponent";
+import Home from "../components/Home/Home";
 
 const HomeView = () =>
 {
 	return(
 		<>
-			<MapComponent />
+			<Home />
 		</>
 	)
 }

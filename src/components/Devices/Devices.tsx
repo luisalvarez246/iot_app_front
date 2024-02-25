@@ -3,10 +3,12 @@ import deviceService from '../../services/deviceService';
 import DeviceToolbar from './DeviceToolbar';
 import DeviceTable from './DeviceTable';
 import { Device, NewDevice } from '../../interfaces/DeviceInterfaces';
+import { Typography } from '@mui/material';
 
 const	Devices = () =>
 {
 	const [devices, setDevices] = useState<Device[]>([]);
+	const deviceHeader = 'Devices';
 
 	const getDevices = async () =>
 	{	
@@ -14,8 +16,6 @@ const	Devices = () =>
 		{
 			let response = await deviceService.getAllDevices();
 			setDevices(response);
-			console.log(response);
-
 		}
 		catch (error)
 		{
@@ -43,6 +43,7 @@ const	Devices = () =>
 
 	return (
 		<>
+			<Typography variant="h2" component="h3" textAlign="center">{deviceHeader}</Typography>
 			<DeviceToolbar add={addDevice}/>
 			<DeviceTable devices={devices} />
 		</>
