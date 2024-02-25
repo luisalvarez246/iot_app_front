@@ -1,20 +1,59 @@
-import axios from 'axios';
-import { Device, NewDevice } from "../interfaces/DeviceInterfaces";
+import { gql } from '@apollo/client';
+import apolloClient from '../apolloClient';
+import { NewDevice } from '../interfaces/DeviceInterfaces';
 
-const baseUrl = 'http://localhost:3001/devices'
+const GET_ALL_DEVICES = gql`
+  query GetAllDevices 
+  {
+    devices 
+	{
+      id
+      name
+      mobileNumber
+      lastConnection
+      latitude
+      longitude
+    }
+  }`;
+
+const CREATE_DEVICE = gql`
+  mutation CreateDevice($createDeviceDto: CreateDeviceDto!) 
+  {
+    createDevice(createDeviceDto: $createDeviceDto) 
+	{
+      id
+      name
+      mobileNumber
+      lastConnection
+      latitude
+      longitude
+    }
+  }`;
 
 const getAllDevices = async () => 
 {
-	const	response = await axios.get<Device[]>(baseUrl);
+	const { data } = await apolloClient.query(
+	{
+		query: GET_ALL_DEVICES,
+	});
 
-	return (response.data);
-}
+	return (data.devices);
+};
 
 const createDevice = async (object: NewDevice) => 
 {
-	const	response = await axios.post<Device>(baseUrl, object);
+	const formattedObject = 
+	{
+	  ...object,
+	  lastConnection: object.lastConnection.toISOString(),
+	}
+	const { data } = await apolloClient.mutate(
+	{
+		errorPolicy: 'all',
+		mutation: CREATE_DEVICE,
+		variables: { createDeviceDto: formattedObject },
+	});
+	return data.createDevice;
+};
 
-	return (response.data);
-}
-
-export default { getAllDevices, createDevice } 
+export default { getAllDevices, createDevice };

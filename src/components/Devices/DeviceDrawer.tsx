@@ -37,10 +37,12 @@ const DeviceDrawer = ({ open, setOpen, add }: DeviceDrawerProps) => {
                 latitude: 0,
                 longitude: 0
             };
+			console.log(newDevice);
             add(newDevice);
             handleClose();
         } 
-		else {
+		else 
+		{
             alert('Please fill in all fields');
         }
     };
