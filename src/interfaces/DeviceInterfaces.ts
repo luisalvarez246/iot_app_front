@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Device
 {
 	id: string,
@@ -37,6 +39,11 @@ export interface NewDeviceForm
 {
     name: string;
     mobileNumber: string;
+}
+
+export interface MarkerClusterGroupProps
+{
+	children: ReactNode;
 }
 
 export type NewDevice = Omit<Device, 'id'>;

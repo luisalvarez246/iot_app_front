@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import { Device, MapComponentProps } from '../../interfaces/DeviceInterfaces';
-import deviceService from '../../services/deviceService';
 import DeviceDetails from '../Devices/DeviceDetails';
+import MarkerClusterGroup from './MarkerClusterGroup';
 
 const MapComponent = ({ devices, mapZoom, mapCenter }: MapComponentProps) => 
 {
@@ -22,17 +22,19 @@ const MapComponent = ({ devices, mapZoom, mapCenter }: MapComponentProps) =>
     			attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     			url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   			/>
-			{devices.map((device) =>(
-				<Marker
-					key={device.id} 
-					position={[device.latitude, device.longitude]}
-					eventHandlers={{ click: () => handleDetails(device) }}
-				>
-    				<Tooltip>
-    				  {device.name} <br /> {device.id}
-    				</Tooltip>
-  				</Marker>
-			))}
+			<MarkerClusterGroup>
+				{devices.map((device) =>(
+					<Marker
+						key={device.id} 
+						position={[device.latitude, device.longitude]}
+						eventHandlers={{ click: () => handleDetails(device) }}
+					>
+    					<Tooltip>
+    					  {device.name} <br /> {device.id}
+    					</Tooltip>
+  					</Marker>
+				))}
+			</MarkerClusterGroup>
 		</MapContainer>
 		{details && <DeviceDetails open={isDetailsOpen} setOpen={setIsDetailsOpen} details={details} />}
 	</>
